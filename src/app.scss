@@ -1,0 +1,112 @@
+@import "./colors.scss";
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+body,
+html,
+#root {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: $pale;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.5rem;
+}
+
+.App {
+  position: relative;
+}
+
+a {
+  text-decoration: none;
+  color: $ghostWhite;
+  cursor: pointer;
+}
+
+a:hover {
+  color: $redAlert;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
+
+.double {
+  flex: 2;
+}
+
+.wrapper {
+  padding: 4rem;
+  height: 100vh;
+  opacity: 1;
+  transition: 0.3s background-color, 0.3s opacity;
+}
+.loading {
+  opacity: 0.25;
+  background-color: #333;
+}
+.box {
+  
+  transform: translate(-50%, -50%);
+  display: inline-block;
+}
+
+/**
+ * CSS Loader - bordered dot
+ */
+
+ .loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+	animation-name: timer;
+	animation-duration: 0.75s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+	border-radius: 50%;
+	box-sizing: border-box;
+}
+
+.loader:before {
+	animation-name: timer;
+	animation-duration: .5s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+	border: 7px double $pastelGreen;
+	border-radius: 50%;
+	box-sizing: border-box;
+	content: "";
+	display: block;
+	width: 120px;
+	height: 120px;
+	left: 50%;
+	margin: -60px 0 0 -60px;
+	position: absolute;
+	top: 50%;
+}
+
+@keyframes timer {
+	from, to {
+		transform: scale(1.0);
+	}
+	
+	50% {
+		transform: scale(1.75);
+  }
+}

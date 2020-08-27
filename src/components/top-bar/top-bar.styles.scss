@@ -1,0 +1,33 @@
+@import "../../colors.scss";
+
+.top-bar {
+  width: 100%;
+  &--container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: $greenTea;
+    background-color: $deepBlue;
+    height: 5rem;
+    & .logo {
+      padding: 0 1rem;
+      background-color: $deepRed;
+    }
+    & .links {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: right;
+      padding: 0 0.5rem;
+      & .greetings {
+        margin-bottom: 0.25rem;
+      }
+    }
+  }
+}
+
+#logout:hover,
+#id:hover {
+  color: $redAlert;
+  cursor: pointer;
+}
