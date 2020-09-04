@@ -2,13 +2,14 @@ import React from "react"
 import ReactDOM from "react-dom"
 import "./index.css"
 import App from "./App"
-import { RecoilRoot } from "recoil"
+import { ApolloProvider } from "@apollo/client"
+import { client } from "./services/client"
 
 ReactDOM.render(
   <React.StrictMode>
-    <RecoilRoot>
+    <ApolloProvider client={client}>
       <App />
-    </RecoilRoot>
+    </ApolloProvider>
   </React.StrictMode>,
   document.getElementById("root")
 )
