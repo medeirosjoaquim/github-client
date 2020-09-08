@@ -1,12 +1,16 @@
 import React, { useContext } from "react"
-import "./top-bar.styles.scss"
+
 import { LoginContext } from "../../context/auth.context"
+
+import GithubIcon from './assets/images/logo.png'
+import "./top-bar.styles.scss"
 
 const TopBar = () => {
   const [login, setLogin] = useContext(LoginContext)
   return (
     <div className="top-bar--container">
       <div className="top-bar--container logo">Github Client</div>
+      <div className="top-bar--container icon"><img src={GithubIcon} alt="github icon"/></div>
       <div className="top-bar--container links">
         {login.token ? (
           <div className="links">

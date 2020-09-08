@@ -1,6 +1,9 @@
 import React, { useContext, useEffect } from "react"
+
 import { LoginContext } from "../../context/auth.context"
 import { LoadingContext } from "../../context/loading.context"
+
+import "./login.styles.scss"
 
 const Login = () => {
   const [, setUser] = useContext(LoginContext)
@@ -31,26 +34,24 @@ const Login = () => {
       })
         .then((response) => response.json())
         .then((data) => {
-          const {name, login, token} = data
-          localStorage.setItem('token', token)
-          setLoading({loading: false})
-          return  data
-            ? setUser({ name, login, token })
-            : () => {}
+          const { name, login, token } = data
+          localStorage.setItem("token", token)
+          setLoading({ loading: false })
+          return data ? setUser({ name, login, token }) : () => {}
         })
     }
   }, [client_id, client_secret, proxy_url, redirect_uri, setLoading, setUser])
 
   return (
-    <>
-      <div>
-        <div>autorize o app para logar com</div>
-        <a href="https://github.com/login/oauth/authorize?client_id=06d336ae0bf6f95399f8">
-          Login com github
-        </a>
-        If that link doesn't work, remember to provide your own{" "}
-      </div>
-    </>
+    <div className="login-container">
+      <span className="login-container--disclaimer">
+        Autorize o app para logar com
+      </span>
+      <a className="login-container link" href="https://github.com/login/oauth/authorize?client_id=06d336ae0bf6f95399f8">
+        github
+      </a>{" "}
+      🥰
+    </div>
   )
 }
 

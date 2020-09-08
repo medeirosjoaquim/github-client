@@ -12,6 +12,11 @@
     & .logo {
       padding: 0 1rem;
       background-color: $deepRed;
+    }  
+    & .icon {
+      img {
+        width: 4rem;
+      }
     }
     & .links {
       flex-direction: column;

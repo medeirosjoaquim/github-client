@@ -5,6 +5,7 @@ import Login from "./components/login"
 import TopBar from "./components/top-bar"
 
 import "./app.scss"
+
 import { LoginContext, IUser } from "./context/auth.context"
 import { ILoading, LoadingContext } from "./context/loading.context"
 
@@ -13,7 +14,9 @@ const App = () => {
     login: "lorem",
     name: "ipsum",
   })
-  const [loadingState, setLoadgingState] = useState<ILoading>({ loading: false })
+  const [loadingState, setLoadgingState] = useState<ILoading>({
+    loading: false,
+  })
 
   return (
     <>
