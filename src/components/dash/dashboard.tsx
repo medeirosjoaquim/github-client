@@ -3,6 +3,8 @@ import React from "react"
 import { gql, useQuery } from "@apollo/client"
 import StarsList from "../stars-list"
 
+// TODO 
+// Adicionar cursor e validar paginação
 const STARRED_REPOSITORIES = gql`
   {
     viewer {
