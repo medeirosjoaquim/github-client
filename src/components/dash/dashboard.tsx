@@ -3,14 +3,12 @@ import React from "react"
 import { gql, useQuery } from "@apollo/client"
 import StarsList from "../stars-list"
 
-// TODO 
-// Adicionar cursor e validar paginação
 const STARRED_REPOSITORIES = gql`
-  {
+  query($cursor: String) {
     viewer {
       login
       name
-      starredRepositories(first: 3, after: "put_in_a_cursor_value_here") {
+      starredRepositories(first: 3, after: $cursor) {
         edges {
           cursor
           node {
@@ -59,10 +57,17 @@ const Dashboard = ({ match }: any) => {
   //     .then((result) => console.log(result))
   //   return () => {}
   // }, [])
+
+  // TODO
+  // exibir dados
   const { data, loading, fetchMore } = useQuery(STARRED_REPOSITORIES)
+
   console.log({ data, loading, fetchMore })
-  return (
+  return loading ? (
+    <>aguarde... carregando... </>
+  ) : (
     <>
+      <div>olá {data.viewer.name}</div>
       <StarsList></StarsList>
     </>
   )
