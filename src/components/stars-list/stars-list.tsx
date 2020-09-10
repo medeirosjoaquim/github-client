@@ -6,7 +6,15 @@ const StarsList = ({ name, starredRepositories }: Viewer) => {
   return (
     <div className="stars-list--container">
       <div>olá {name}!</div>
-  <div>essas são suas estrelas: {starredRepositories.edges.map( repo => (<div>{repo.node.name}</div>))}</div>
+      <div>
+        essas são suas estrelas:{" "}
+        <div style={{ display: "flex", flexWrap: 'wrap' }}>
+          {starredRepositories.edges.map((repo) => (
+            // todo, montar card do repositorio
+            <div style={{margin: '0 1rem'}}>{repo.node.name}|</div>
+          ))}
+        </div>
+      </div>
     </div>
   )
 }
