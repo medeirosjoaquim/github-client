@@ -1,35 +1,42 @@
-  export interface PrimaryLanguage {
-      id: string;
-      name: string;
-      color: string;
-  }
+    export interface PrimaryLanguage {
+        id: string;
+        name: string;
+        color: string;
+    }
 
-  export interface Node {
-      id: string;
-      name: string;
-      primaryLanguage: PrimaryLanguage;
-  }
+    export interface Stargazers {
+        totalCount: number;
+    }
 
-  export interface Edge {
-      cursor: string;
-      node: Node;
-  }
+    export interface StarredRepository {
+        id: string;
+        name: string;
+        primaryLanguage: PrimaryLanguage;
+        description: string;
+        stargazers: Stargazers;
+        url: string;
+    }
 
-  export interface StarredRepositories {
-      edges: Edge[];
-  }
+    export interface Edge {
+        cursor: string;
+        node: StarredRepository;
+    }
 
-  export interface Viewer {
-      login?: string;
-      name: string;
-      starredRepositories: StarredRepositories;
-  }
+    export interface StarredRepositories {
+        edges: Edge[];
+    }
 
-  export interface Data {
-      viewer: Viewer;
-  }
+    export interface Viewer {
+        login?: string;
+        name: string;
+        starredRepositories: StarredRepositories;
+    }
 
-  export interface RootObject {
-      data: Data;
-  }
+    export interface Data {
+        viewer: Viewer;
+    }
+
+    export interface RootObject {
+        data: Data;
+    }
 

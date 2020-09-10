@@ -8,7 +8,7 @@ const STARRED_REPOSITORIES = gql`
     viewer {
       login
       name
-      starredRepositories(first: 10, after: $cursor) {
+      starredRepositories(first: 15, after: $cursor) {
         edges {
           cursor
           node {
@@ -19,6 +19,11 @@ const STARRED_REPOSITORIES = gql`
               name
               color
             }
+            description
+            stargazers {
+              totalCount
+            }
+            url
           }
         }
       }
@@ -39,7 +44,7 @@ const Dashboard = ({ match }: any) => {
     console.log({ data, loading, fetchMore })
     const { name, starredRepositories } = data?.viewer
     return (
-      <>       
+      <>
         <StarsList
           name={name}
           starredRepositories={starredRepositories}
