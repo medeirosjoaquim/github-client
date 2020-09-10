@@ -8,7 +8,7 @@ const STARRED_REPOSITORIES = gql`
     viewer {
       login
       name
-      starredRepositories(first: 3, after: $cursor) {
+      starredRepositories(first: 10, after: $cursor) {
         edges {
           cursor
           node {
@@ -28,49 +28,25 @@ const STARRED_REPOSITORIES = gql`
 // https://medium.com/vlgunarathne/introduction-to-github-graphql-api-423ebbab75f9
 // pagination
 
-/*
-viewer {
-    login
-    name
-    starredRepositories(first: 3) {
-      edges {
-        cursor
-        node {
-          id
-          name
-          primaryLanguage {
-            id
-            name
-            color
-          }
-        }
-      }
-    }
-  }
-*/
 const Dashboard = ({ match }: any) => {
-  // useEffect(() => {
-  //   client
-  //     .query({
-  //       query: ,
-  //     })
-  //     .then((result) => console.log(result))
-  //   return () => {}
-  // }, [])
-
   // TODO
   // exibir dados
   const { data, loading, fetchMore } = useQuery(STARRED_REPOSITORIES)
 
-  console.log({ data, loading, fetchMore })
-  return loading ? (
-    <>aguarde... carregando... </>
-  ) : (
-    <>
-      <div>olá {data.viewer.name}</div>
-      <StarsList></StarsList>
-    </>
-  )
+  if (loading) {
+    return <>aguarde... carregando... </>
+  } else {
+    console.log({ data, loading, fetchMore })
+    const { name, starredRepositories } = data?.viewer
+    return (
+      <>       
+        <StarsList
+          name={name}
+          starredRepositories={starredRepositories}
+        ></StarsList>
+      </>
+    )
+  }
 }
 
 export default Dashboard

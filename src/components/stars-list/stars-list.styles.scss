@@ -1,0 +1,13 @@
+@import "../../colors.scss";
+.stars-list--container {
+    width: 60%;
+    height: 60%;
+    margin: 0 auto;
+    text-align: center;
+    &--disclaimer {
+        margin-right: .5rem;
+    }
+    .link {
+        text-decoration: underline;
+    }
+}

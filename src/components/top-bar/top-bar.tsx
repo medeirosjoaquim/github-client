@@ -14,7 +14,7 @@ const TopBar = () => {
       <div className="top-bar--container links">
         {login.token ? (
           <div className="links">
-            <div className="greetings">olá, {login.name}!</div>
+            <div className="greetings">{login.login}!</div>
             <div id="logout" onClick={() => setLogin({token: undefined})}>logout</div>
           </div>
         ) : (
