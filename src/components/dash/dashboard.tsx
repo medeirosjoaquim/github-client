@@ -8,7 +8,7 @@ const STARRED_REPOSITORIES = gql`
     viewer {
       login
       name
-      starredRepositories(first: 15, after: $cursor) {
+      starredRepositories(first: 18, after: $cursor) {
         edges {
           cursor
           node {

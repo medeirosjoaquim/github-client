@@ -1,9 +1,11 @@
 @import "../../colors.scss";
 .stars-list--container {
-    width: 60%;
-    height: 60%;
+    width: 90%;
+    height: 90%;
     margin: 0 auto;
-    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     &--disclaimer {
         margin-right: .5rem;
     }

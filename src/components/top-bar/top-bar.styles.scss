@@ -1,7 +1,9 @@
 @import "../../colors.scss";
 
 .top-bar {
-  width: 100%;
+  position: fixed;
+  bottom: 0;
+  right: 0;
   &--container {
     display: flex;
     align-items: center;
@@ -9,10 +11,9 @@
     color: $greenTea;
     background-color: $deepBlue;
     height: 5rem;
-    & .logo {
-      padding: 0 1rem;
+    & .app-name {
       background-color: $deepRed;
-    }  
+    }
     & .icon {
       img {
         width: 4rem;

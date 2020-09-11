@@ -1,0 +1,30 @@
+.card {
+    
+    background-color: #ddd;
+    padding: 1rem;
+    height: 12rem;
+    width: 32rem;
+    margin: .5rem;
+  }
+  
+  .card-head {
+    font-size: 16px;
+    height: 25%;
+  }
+
+  .card-body {
+    position: relative;
+    width: 90%;
+    height: 75%;
+  }
+  
+  .language {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }  
+  .stars {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }

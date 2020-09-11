@@ -7,13 +7,10 @@ const StarsList = ({ name, starredRepositories }: Viewer) => {
   console.log(starredRepositories)
   return (
     <div className="stars-list--container">
-      <div>olá {name}!</div>
-      <div>
-        essas são suas estrelas:{" "}
-        <div style={{ display: "flex", flexWrap: 'wrap' }}>
           {starredRepositories.edges.map((repo) => (
             // todo, montar card do repositorio
             <RepoCard 
+            key={repo.cursor}
             id={repo.node.id}
             description={repo.node.description}
             name={repo.node.name}
@@ -22,9 +19,8 @@ const StarsList = ({ name, starredRepositories }: Viewer) => {
             url={repo.node.url}
             ></RepoCard>
           ))}
-        </div>
       </div>
-    </div>
+    
   )
 }
 
