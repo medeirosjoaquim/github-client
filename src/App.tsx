@@ -2,7 +2,7 @@ import React, { useState } from "react"
 
 import Dash from "./components/dash"
 import Login from "./components/login"
-import TopBar from "./components/top-bar"
+import UserBar from "./components/user-bar"
 
 import "./app.scss"
 
@@ -11,8 +11,8 @@ import { ILoading, LoadingContext } from "./context/loading.context"
 
 const App = () => {
   const [user, setUser] = useState<IUser>({
-    login: "lorem",
-    name: "ipsum",
+    login: "",
+    name: "",
   })
   const [loadingState, setLoadgingState] = useState<ILoading>({
     loading: false,
@@ -22,11 +22,11 @@ const App = () => {
     <>
       <LoadingContext.Provider value={[loadingState, setLoadgingState]}>
         <LoginContext.Provider value={[user, setUser]}>
-          <TopBar />
           {loadingState?.loading && <div className="box loader"></div>}
           <div className={`wrapper ${loadingState?.loading ? "loading" : ""} `}>
             {user.token ? <Dash /> : <Login />}
           </div>
+          <UserBar />
         </LoginContext.Provider>
       </LoadingContext.Provider>
     </>

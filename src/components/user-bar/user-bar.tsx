@@ -3,11 +3,11 @@ import React, { useContext, useState } from "react"
 import { LoginContext } from "../../context/auth.context"
 
 import GithubIcon from "./assets/images/logo.png"
-import "./top-bar.styles.scss"
+import "./user-bar.styles.scss"
 
-const TopBar = () => {
+const UserBar = () => {
   const [login, setLogin] = useContext(LoginContext)
-  const [hover, setHover] = useState(false)
+  const [, setHover] = useState(false)
   return (
     <div className="top-bar">
       <div className="top-bar--container">
@@ -38,4 +38,4 @@ const TopBar = () => {
   )
 }
 
-export default TopBar
+export default UserBar

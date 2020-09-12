@@ -4,11 +4,11 @@ import { gql, useQuery } from "@apollo/client"
 import StarsList from "../stars-list"
 
 const STARRED_REPOSITORIES = gql`
-  query($cursor: String) {
+  query repoQuery($after: String) {
     viewer {
       login
       name
-      starredRepositories(first: 18, after: $cursor) {
+      starredRepositories(first: 2, after: $after) {
         edges {
           cursor
           node {
@@ -26,6 +26,9 @@ const STARRED_REPOSITORIES = gql`
             url
           }
         }
+        pageInfo {
+          endCursor
+        }
       }
     }
   }
@@ -36,19 +39,40 @@ const STARRED_REPOSITORIES = gql`
 const Dashboard = ({ match }: any) => {
   // TODO
   // exibir dados
-  const { data, loading, fetchMore } = useQuery(STARRED_REPOSITORIES)
-
+  const { data, loading, fetchMore } = useQuery(STARRED_REPOSITORIES, {
+    variables: { after: null },
+  })
   if (loading) {
     return <>aguarde... carregando... </>
   } else {
-    console.log({ data, loading, fetchMore })
     const { name, starredRepositories } = data?.viewer
+    let repos = starredRepositories
     return (
       <>
         <StarsList
+          login={""}
           name={name}
-          starredRepositories={starredRepositories}
+          starredRepositories={repos}
         ></StarsList>
+        <button
+          onClick={() => {
+            const { endCursor } = data.viewer.starredRepositories.pageInfo
+            console.log(endCursor)
+            fetchMore({
+              query: STARRED_REPOSITORIES,
+              variables: { after: endCursor },
+              updateQuery: (prevResult:any, { fetchMoreResult }: any) => {
+                fetchMoreResult.viewer.starredRepositories.edges = [
+                  ...prevResult.viewer.starredRepositories.edges,
+                  ...fetchMoreResult.viewer.starredRepositories.edges
+                ];
+                return fetchMoreResult;
+              }
+            })
+          }}
+        >
+          fetch more
+        </button>
       </>
     )
   }

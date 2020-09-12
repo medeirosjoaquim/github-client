@@ -3,8 +3,7 @@ import { Viewer } from "../../typings/viewer.model"
 import "./stars-list.styles.scss"
 import RepoCard from "../repo-card"
 
-const StarsList = ({ name, starredRepositories }: Viewer) => {
-  console.log(starredRepositories)
+const StarsList = ({ starredRepositories }: Viewer) => {
   return (
     <div className="stars-list--container">
           {starredRepositories.edges.map((repo) => (

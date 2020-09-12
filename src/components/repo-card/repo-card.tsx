@@ -1,6 +1,6 @@
 import React from "react"
 import "./repo-card.styles.scss"
-import { StarredRepository } from "../../typings/viewer.model"
+import { Node } from "../../typings/viewer.model"
 const RepoCard = ({
   id,
   description,
@@ -8,7 +8,7 @@ const RepoCard = ({
   primaryLanguage,
   stargazers,
   url,
-}: StarredRepository) => {
+}: Node) => {
   return (
     <div className="card">
       <div className="card-head">
@@ -41,16 +41,6 @@ const RepoCard = ({
       </div>
     </div>
   )
-  //   return <div>
-  //       <ul>
-  // <li>id: {id}</li>
-  // <li>description: {description}</li>
-  // <li>name: {name}</li>
-  // <li>languague: {primaryLanguage.name}</li>
-  // <li>{url}</li>
-  // <li>total stars: {stargazers.totalCount}</li>
-  //       </ul>
-  //   </div>
 }
 
 export default RepoCard
