@@ -22,7 +22,9 @@ const RepoCard = ({
           <div
             className="circle"
             style={{
-              backgroundColor: primaryLanguage.color,
+              backgroundColor: primaryLanguage?.color
+                ? primaryLanguage.color
+                : "black",
               height: ".5rem",
               width: ".5rem",
               borderRadius: "25px",
@@ -32,8 +34,14 @@ const RepoCard = ({
             }}
           ></div>
           <span className="bold" style={{ verticalAlign: "middle" }}>
-            {primaryLanguage.name}
-          </span>
+            {primaryLanguage?.name}
+          </span>{" "}
+          <div
+            className="bold"
+            style={{ verticalAlign: "middle", fontSize: "12px" }}
+          >
+            {url}
+          </div>
         </div>
         <span className="bold stars" style={{ verticalAlign: "middle" }}>
           stars: {stargazers.totalCount}

@@ -1,14 +1,12 @@
-import React from "react"
-// import { client } from "../../services/client"
+import React, { useState } from "react"
 import { gql, useQuery } from "@apollo/client"
 import StarsList from "../stars-list"
-
 const STARRED_REPOSITORIES = gql`
   query repoQuery($after: String) {
     viewer {
       login
       name
-      starredRepositories(first: 2, after: $after) {
+      starredRepositories(first: 10, after: $after) {
         edges {
           cursor
           node {
@@ -33,35 +31,39 @@ const STARRED_REPOSITORIES = gql`
     }
   }
 `
-const Dashboard = ({ match }: any) => {
+const Dashboard = () => {
   const { data, loading, fetchMore } = useQuery(STARRED_REPOSITORIES, {
     variables: { after: null },
   })
-
+  const [counter, setValue] = useState(0)
+  // const [repos, setRespos] = useState<StarredRepositories>({})
   if (loading) {
     return <>aguarde... carregando... </>
   } else {
     const { name, starredRepositories } = data?.viewer
     let repos = starredRepositories
-
-    // const fetchMoreRepos = () => {
-    //   const { endCursor } = data.viewer.starredRepositories.pageInfo
-    //   fetchMore({
-    //     query: STARRED_REPOSITORIES,
-    //     variables: { after: endCursor },
-    //     updateQuery: (prevResult: any, { fetchMoreResult }: any) => {
-    //       fetchMoreResult.viewer.starredRepositories.edges = [
-    //         ...prevResult.viewer.starredRepositories.edges,
-    //         ...fetchMoreResult.viewer.starredRepositories.edges,
-    //       ]
-    //       return fetchMoreResult
-    //     },
-    //   })
-    // }
+    const fetchMoreRepos = () => {
+      const { endCursor } = data.viewer.starredRepositories.pageInfo
+      fetchMore({
+        //query: STARRED_REPOSITORIES,
+        variables: { after: endCursor },
+        updateQuery: (prevResult: any, { fetchMoreResult }: any) => {
+          fetchMoreResult.viewer.starredRepositories.edges = [
+            ...prevResult.viewer.starredRepositories.edges,
+            ...fetchMoreResult.viewer.starredRepositories.edges,
+          ]
+          console.log(fetchMoreResult)
+          setValue(fetchMoreResult.viewer.starredRepositories.edges.length)
+          return fetchMoreResult
+        },
+      })
+    }
 
     return (
       <>
-        <StarsList name={name} starredRepositories={repos}></StarsList>
+      <p>{counter}</p>
+      <button onClick={()=> fetchMoreRepos()}>fetch</button>
+        <StarsList loading={loading} name={name} starredRepositories={repos} fetchMore={fetchMoreRepos}></StarsList>
       </>
     )
   }
