@@ -1,7 +1,8 @@
-import React, { useRef, useCallback } from "react"
+import React, { useRef, useCallback, useContext } from "react"
 import { StarredRepositories } from "../../typings/viewer.model"
 import "./stars-list.styles.scss"
 import RepoCard from "../repo-card"
+import { LoadingContext } from "../../context/loading.context"
 
 interface StarsListProps {
   name: string
@@ -11,11 +12,12 @@ interface StarsListProps {
 }
 
 const StarsList = ({ starredRepositories, fetchMore, loading }: StarsListProps) => {
+
   const observer = useRef<IntersectionObserver>(
     new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         console.log("visible")
-        fetchMore()
+        //fetchMore()
       }
     })
   )

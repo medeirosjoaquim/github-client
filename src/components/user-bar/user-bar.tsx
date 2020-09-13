@@ -7,9 +7,13 @@ import "./user-bar.styles.scss"
 
 const UserBar = () => {
   const [login, setLogin] = useContext(LoginContext)
-  const [, setHover] = useState(false)
+  const [hover, setHover] = useState(false)
   return (
-    <div className="top-bar">
+    <div
+      className="top-bar"
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+    >
       <div className="top-bar--container">
         {/* <div className="top-bar--container app-name" style={{display: hover ? 'initial' : 'none', padding: '1rem'}}>Github Client</div> */}
         <div className="top-bar--container icon">
@@ -19,13 +23,12 @@ const UserBar = () => {
           {login.token ? (
             <div
               className="links"
-              onMouseEnter={() => setHover(true)}
-              onMouseLeave={() => setHover(false)}
+              style={{ display: hover ? "initial" : "none" }}
             >
               <div id="logout" onClick={() => setLogin({ token: undefined })}>
                 logout
               </div>
-              <div className="greetings">{login.login}!</div>
+              <div className="greetings">{login.login}</div>
             </div>
           ) : (
             <a href="https://github.com/login/oauth/authorize?client_id=06d336ae0bf6f95399f8">

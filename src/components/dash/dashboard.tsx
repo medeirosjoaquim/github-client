@@ -1,6 +1,7 @@
-import React, { useState } from "react"
+import React, { useEffect, useContext, useCallback } from "react"
 import { gql, useQuery } from "@apollo/client"
 import StarsList from "../stars-list"
+import { LoadingContext } from "../../context/loading.context"
 const STARRED_REPOSITORIES = gql`
   query repoQuery($after: String) {
     viewer {
@@ -32,10 +33,30 @@ const STARRED_REPOSITORIES = gql`
   }
 `
 const Dashboard = () => {
+  // const [, setLoading] = useContext(LoadingContext)
   const { data, loading, fetchMore } = useQuery(STARRED_REPOSITORIES, {
     variables: { after: null },
+    notifyOnNetworkStatusChange: true,
   })
-  // const [repos, setRespos] = useState<StarredRepositories>({})
+
+  // useEffect(() => {
+  //   console.log('fire')
+  //   if (loading) {
+  //     setLoading({ loading: true })
+  //   } else {
+  //     setLoading({ loading: false })
+  //   }
+  // }, [loading, setLoading])
+
+  // useCallback(() => {
+  //   console.log('fire')
+  //   if (loading) {
+  //     setLoading({ loading: true })
+  //   } else {
+  //     setLoading({ loading: false })
+  //   }
+  // }, [loading, setLoading])
+
   if (loading) {
     return <>aguarde... carregando... </>
   } else {
@@ -50,7 +71,6 @@ const Dashboard = () => {
             ...prevResult.viewer.starredRepositories.edges,
             ...fetchMoreResult.viewer.starredRepositories.edges,
           ]
-          console.log(fetchMoreResult)
           return fetchMoreResult
         },
       })
@@ -58,8 +78,13 @@ const Dashboard = () => {
 
     return (
       <>
-      <button onClick={()=> fetchMoreRepos()}>fetch</button>
-        <StarsList loading={loading} name={name} starredRepositories={repos} fetchMore={fetchMoreRepos}></StarsList>
+        <button onClick={() => fetchMoreRepos()}>fetch</button>
+        <StarsList
+          loading={loading}
+          name={name}
+          starredRepositories={repos}
+          fetchMore={fetchMoreRepos}
+        ></StarsList>
       </>
     )
   }
