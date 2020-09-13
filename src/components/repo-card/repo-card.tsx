@@ -15,7 +15,7 @@ const RepoCard = ({
         <span className="bold">
           {name} {":"}{" "}
         </span>
-        <span>{description}</span>
+        <p>{description}</p>
       </div>
       <div className="card-body">
         <div className="language" style={{ textAlign: "end" }}>

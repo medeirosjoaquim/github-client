@@ -33,46 +33,35 @@ const STARRED_REPOSITORIES = gql`
     }
   }
 `
-// https://medium.com/vlgunarathne/introduction-to-github-graphql-api-423ebbab75f9
-// pagination
-
 const Dashboard = ({ match }: any) => {
-  // TODO
-  // exibir dados
   const { data, loading, fetchMore } = useQuery(STARRED_REPOSITORIES, {
     variables: { after: null },
   })
+
   if (loading) {
     return <>aguarde... carregando... </>
   } else {
     const { name, starredRepositories } = data?.viewer
     let repos = starredRepositories
+
+    // const fetchMoreRepos = () => {
+    //   const { endCursor } = data.viewer.starredRepositories.pageInfo
+    //   fetchMore({
+    //     query: STARRED_REPOSITORIES,
+    //     variables: { after: endCursor },
+    //     updateQuery: (prevResult: any, { fetchMoreResult }: any) => {
+    //       fetchMoreResult.viewer.starredRepositories.edges = [
+    //         ...prevResult.viewer.starredRepositories.edges,
+    //         ...fetchMoreResult.viewer.starredRepositories.edges,
+    //       ]
+    //       return fetchMoreResult
+    //     },
+    //   })
+    // }
+
     return (
       <>
-        <StarsList
-          login={""}
-          name={name}
-          starredRepositories={repos}
-        ></StarsList>
-        <button
-          onClick={() => {
-            const { endCursor } = data.viewer.starredRepositories.pageInfo
-            console.log(endCursor)
-            fetchMore({
-              query: STARRED_REPOSITORIES,
-              variables: { after: endCursor },
-              updateQuery: (prevResult:any, { fetchMoreResult }: any) => {
-                fetchMoreResult.viewer.starredRepositories.edges = [
-                  ...prevResult.viewer.starredRepositories.edges,
-                  ...fetchMoreResult.viewer.starredRepositories.edges
-                ];
-                return fetchMoreResult;
-              }
-            })
-          }}
-        >
-          fetch more
-        </button>
+        <StarsList name={name} starredRepositories={repos}></StarsList>
       </>
     )
   }
