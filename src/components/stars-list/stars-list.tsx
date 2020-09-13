@@ -23,8 +23,14 @@ const StarsList = ({ starredRepositories, fetchMore, loading }: StarsListProps) 
   const lastElementRef = useCallback((node) => {
     if (loading) return
     if (observer.current) observer.current!.disconnect()
+    observer.current = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        console.log("visible")
+        fetchMore()
+      }
+    })
     if (node) observer.current.observe(node)
-  }, [loading])
+  }, [fetchMore, loading])
 
   return (
     <div className="stars-list--container">

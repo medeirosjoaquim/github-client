@@ -35,7 +35,6 @@ const Dashboard = () => {
   const { data, loading, fetchMore } = useQuery(STARRED_REPOSITORIES, {
     variables: { after: null },
   })
-  const [counter, setValue] = useState(0)
   // const [repos, setRespos] = useState<StarredRepositories>({})
   if (loading) {
     return <>aguarde... carregando... </>
@@ -45,7 +44,6 @@ const Dashboard = () => {
     const fetchMoreRepos = () => {
       const { endCursor } = data.viewer.starredRepositories.pageInfo
       fetchMore({
-        //query: STARRED_REPOSITORIES,
         variables: { after: endCursor },
         updateQuery: (prevResult: any, { fetchMoreResult }: any) => {
           fetchMoreResult.viewer.starredRepositories.edges = [
@@ -53,7 +51,6 @@ const Dashboard = () => {
             ...fetchMoreResult.viewer.starredRepositories.edges,
           ]
           console.log(fetchMoreResult)
-          setValue(fetchMoreResult.viewer.starredRepositories.edges.length)
           return fetchMoreResult
         },
       })
@@ -61,7 +58,6 @@ const Dashboard = () => {
 
     return (
       <>
-      <p>{counter}</p>
       <button onClick={()=> fetchMoreRepos()}>fetch</button>
         <StarsList loading={loading} name={name} starredRepositories={repos} fetchMore={fetchMoreRepos}></StarsList>
       </>
