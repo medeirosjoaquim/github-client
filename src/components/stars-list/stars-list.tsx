@@ -5,9 +5,9 @@ import RepoCard from "../repo-card"
 import { LoadingContext } from "../../context/loading.context"
 
 interface StarsListProps {
-  name: string
+  name?: string
   loading: boolean
-  starredRepositories: StarredRepositories
+  starredRepositories?: StarredRepositories
   fetchMore: () => void
 }
 
@@ -36,7 +36,7 @@ const StarsList = ({ starredRepositories, fetchMore, loading }: StarsListProps) 
 
   return (
     <div className="stars-list--container">
-      {starredRepositories.edges.map((repo, index) => (
+      {starredRepositories?.edges.map((repo, index) => (
         // todo, montar card do repositorio
         <div
           key={`${repo.node.name}${repo.node.id}`}
