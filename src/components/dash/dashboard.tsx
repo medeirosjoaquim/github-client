@@ -33,12 +33,12 @@ const STARRED_REPOSITORIES = gql`
   }
 `
 const Dashboard = () => {
-  // const [, setLoading] = useContext(LoadingContext)
   const { data, loading, fetchMore } = useQuery(STARRED_REPOSITORIES, {
     variables: { after: null },
     notifyOnNetworkStatusChange: true,
   })
-
+  
+  // const [, setLoading] = useContext(LoadingContext)
   // useEffect(() => {
   //   console.log('fire')
   //   if (loading) {
@@ -79,7 +79,7 @@ const Dashboard = () => {
     return (
       <>
         <button onClick={() => fetchMoreRepos()}>fetch</button>
-        <StarsList
+        <StarsList    
           loading={loading}
           name={name}
           starredRepositories={repos}

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 
 import Dash from "./components/dash"
 import Login from "./components/login"
@@ -8,8 +8,14 @@ import "./app.scss"
 
 import { LoginContext, IUser } from "./context/auth.context"
 import { ILoading, LoadingContext } from "./context/loading.context"
+import database from "./services/firebase"
 
 const App = () => {
+  useEffect(() => {
+    const agora = new Date()
+    database.ref("todo").push({ hello: "world", hora: agora.toISOString() })
+    return () => {}
+  }, [])
   const [user, setUser] = useState<IUser>({
     login: "",
     name: "",
