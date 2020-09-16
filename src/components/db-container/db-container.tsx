@@ -1,15 +1,15 @@
 import React, { useEffect } from "react"
-import {addRxPlugin, createRxDatabase}  from "rxdb"
+import * as RxDb  from "rxdb"
 import { schema } from "../../schema"
 
 const DbContainer = () => {
-  addRxPlugin(require("pouchdb-adapter-idb"))
-  addRxPlugin(require("pouchdb-adapter-http"))
+  RxDb.plugin(require("pouchdb-adapter-idb"))
+  RxDb.plugin(require("pouchdb-adapter-http"))
   const syncURL = "http://localhost:5984/"
   const dbName = "chatdb"
 
   const createDatabase = async () => {
-    const db = await createRxDatabase({
+    const db = await RxDb.createRxDatabase({
       name: dbName,
       adapter: "idb",
       password: "12345678",
