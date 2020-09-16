@@ -8,6 +8,7 @@ import "./app.scss"
 
 import { LoginContext, IUser } from "./context/auth.context"
 import { ILoading, LoadingContext } from "./context/loading.context"
+import DbContainer from "./components/db-container"
 // import database from "./services/firebase"
 
 const App = () => {
@@ -28,6 +29,7 @@ const App = () => {
     <>
       <LoadingContext.Provider value={[loadingState, setLoadgingState]}>
         <LoginContext.Provider value={[user, setUser]}>
+        <DbContainer/>
           {loadingState?.loading && <div className="box loader"></div>}
           <div className={`wrapper ${loadingState?.loading ? "loading" : ""} `}>
             {user.token ? <Dash /> : <Login />}
